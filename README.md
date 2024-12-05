@@ -1,4 +1,4 @@
-# 📝 Full Sail University - Card Match
+# 📝 Full Sail University - Card Match (https://card-match-game-fso.netlify.app/)
 
 In this week's activity, you are tasked with building a new HTML/TypeScript/SASS browser game.
 
@@ -32,3 +32,7 @@ You do not need to create a custom design for this activity, but you are welcome
 ### 🛠️ Setup 
 
 ![Screenshot 2024-12-05 094446](https://github.com/user-attachments/assets/6ccf7a4d-6529-4395-82a2-d971f3347f8e)
+
+### ╰┈➤ Deploy to Netlify (**_On Github Push_**)
+
+![Screenshot 2024-12-05 102507](https://github.com/user-attachments/assets/191f15b6-5509-4dc3-b056-c8e18c6accab)
