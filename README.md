@@ -1,4 +1,6 @@
-# 📝 Full Sail University - Card Match (https://card-match-game-fso.netlify.app/)
+# 📝 Full Sail University - Card Match
+
+### 🔗 https://card-match-game-fso.netlify.app/
 
 In this week's activity, you are tasked with building a new HTML/TypeScript/SASS browser game.
 
