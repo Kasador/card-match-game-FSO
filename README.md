@@ -29,6 +29,6 @@ You do not need to create a custom design for this activity, but you are welcome
 
 # 📈 Progress Screenshots >>>
 
-### Setup 
+### 🛠️ Setup 
 
 ![Screenshot 2024-12-05 094446](https://github.com/user-attachments/assets/6ccf7a4d-6529-4395-82a2-d971f3347f8e)
