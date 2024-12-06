@@ -1,18 +1,63 @@
 // imports to (main - index.scss) file
 @use './styles/reset'; // using @use instead of @import for modern SCSS use-case
 @use './styles/typography'; // separate for better organization
+// @use 'sass:color'; https://sass-lang.com/documentation/modules/color/ >>> color-min not working
 
-// color scheme >>>
+// color variables >>> the main color scheme
 $color-bg: #455435; // army green, darkish
 $color-body: #E8E4C9; // dirty white
+$greyish-color: color-mix(in hsl, $color-body, grey 70%); // mix deprecated; use "color-mix" instead 
 $color-card: #28282B; // dull black
 $color-button-bg: #238AB5; // dark baby blue
+
+// font variables >>>
+$font-size-extra-large: 2.2rem;
+$font-size-large: 1.7rem;
+$font-size-medium: 1.2rem;
+$font-size-small: 0.9rem;
 
 body {
     background-color: $color-bg;
     font-family: Open_Sans-normal;
 }
 
-#header-attempts-text {
-    font-family: Open_Sans-italic;
+header { // header styles
+    display: flex;
+    justify-content: center;
+    color: $color-body;
+
+    section { // header wrapper
+        display: flex;
+        justify-content: center;
+        width: 85%;
+        margin: 15px;
+        align-items: baseline; 
+
+        section { // header title section
+            display: flex;
+            flex-direction: column;
+
+            h1 {
+                font-size: $font-size-extra-large;
+                // width: 234px; prevent text-wrap
+                white-space: nowrap; // better solution to prevent text-wrap
+            }
+            p {
+                font-size: $font-size-medium;
+                margin-top: 10px;
+                color: $greyish-color;
+            }
+        }
+
+        h1 { // header attempts text
+            font-size: $font-size-large;
+            // width: 195px; prevent text-wrap
+            white-space: nowrap;
+            font-family: Open_Sans-italic;
+        }
+        #header-attempts-text {
+            position: relative;
+            bottom: 3px;
+        }
+    }
 }
