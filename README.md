@@ -38,3 +38,11 @@ You do not need to create a custom design for this activity, but you are welcome
 ### ╰┈➤ Deploy to Netlify (**_On Github Push_**)
 
 ![Screenshot 2024-12-05 102507](https://github.com/user-attachments/assets/191f15b6-5509-4dc3-b056-c8e18c6accab)
+
+### 📘 Frontend
+
+![Screenshot 2024-12-06 083728](https://github.com/user-attachments/assets/04893251-073f-468f-a253-7e6035726c7d)
+
+### 📖 Backend
+
+...no progress to share
