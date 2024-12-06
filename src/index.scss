@@ -1,41 +1,63 @@
 // imports to (main - index.scss) file
 @use './styles/reset'; // using @use instead of @import for modern SCSS use-case
+@use './styles/typography'; // separate for better organization
+// @use 'sass:color'; https://sass-lang.com/documentation/modules/color/ >>> color-min not working
 
-// color scheme >>>
+// color variables >>> the main color scheme
 $color-bg: #455435; // army green, darkish
 $color-body: #E8E4C9; // dirty white
+$greyish-color: color-mix(in hsl, $color-body, grey 70%); // mix deprecated; use "color-mix" instead 
 $color-card: #28282B; // dull black
 $color-button-bg: #238AB5; // dark baby blue
 
-/* import Google fonts >>> refs
-    1) https://fonts.google.com/specimen/Rock+3D?categoryFilters=Feeling:%2FExpressive%2FPlayful
-    2) https://fonts.google.com/specimen/Shadows+Into+Light
-    3) https://fonts.google.com/specimen/Open+Sans?preview.text=Use%20the%20three%20attempts%20you%20have...
-*/
-@import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap'); // using import >> title text // "Card Match Game"
-@font-face { // using font-face >>> card text // turned over
-    font-family: 'Rock_3D-Cards';
-    src: url(../assets/fonts/Rock3D-Regular.ttf) format('truetype');
-}
-@font-face { // using font-face >>> body text // normal
-    font-family: 'Open_Sans-normal';
-    src: url(../assets/fonts/Open_Sans/OpenSans-VariableFont_wdth\,wght.ttf) format('truetype');
-}
-@font-face { // using font-face >>> body text // italic 
-    font-family: 'Open_Sans-italic';
-    src: url(../assets/fonts/Open_Sans/OpenSans-Italic-VariableFont_wdth\,wght.ttf) format('truetype');
-}
-.shadows-into-light-regular { // CSS class to use the imported font
-    font-family: "Shadows Into Light", cursive;
-    font-weight: 400;
-    font-style: normal;
-}
+// font variables >>>
+$font-size-extra-large: 2.2rem;
+$font-size-large: 1.7rem;
+$font-size-medium: 1.2rem;
+$font-size-small: 0.9rem;
 
 body {
     background-color: $color-bg;
     font-family: Open_Sans-normal;
 }
 
-#header-attempts-text {
-    font-family: Open_Sans-italic;
+header { // header styles
+    display: flex;
+    justify-content: center;
+    color: $color-body;
+
+    section { // header wrapper
+        display: flex;
+        justify-content: center;
+        width: 85%;
+        margin: 15px;
+        align-items: baseline; 
+
+        section { // header title section
+            display: flex;
+            flex-direction: column;
+
+            h1 {
+                font-size: $font-size-extra-large;
+                // width: 234px; prevent text-wrap
+                white-space: nowrap; // better solution to prevent text-wrap
+            }
+            p {
+                font-size: $font-size-medium;
+                margin-top: 10px;
+                color: $greyish-color;
+            }
+        }
+
+        h1 { // header attempts text
+            font-size: $font-size-large;
+            // width: 195px; prevent text-wrap
+            white-space: nowrap;
+            font-family: Open_Sans-italic;
+        }
+        #header-attempts-text {
+            position: relative;
+            bottom: 3px;
+        }
+    }
 }

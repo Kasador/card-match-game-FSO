@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- <link href="./_styles/reset.css" type="text/scss" rel="stylesheet"/> using imports instead of links >>> best practices SCSS-->
-    <link href="./index.scss" type="text/scss" rel="stylesheet"/>
+    <link href="./index.scss" type="text/scss" rel="stylesheet"/> <!-- main SCSS stylesheet -->
     <title>Card Match Game</title>
 </head>
 <body>
     <header> <!-- header section >>> header text -->
         <section>
-            <h1 class="shadows-into-light-regular">Card Match Game</h1>
-            <p>Use the three attempts you have to try to <br> find the three matching pairs of cards.</p>
+            <section>
+                <h1 class="shadows-into-light-regular">Card Match Game</h1>
+                <p>Use the three attempts you have to try to <br> find the three matching pairs of cards.</p>
+            </section>
+            <h1 id="header-attempts-text">Attempts Left: 3</h1>
         </section>
-        <h1 id="header-attempts-text">Attempts Left: 3</h1>
     </header>
     <main> <!-- main section >>> cards -->
 
@@ -22,6 +24,6 @@
         <h1>Try to Match!</h1>
         <button>Star Over!</button>
     </footer>
-    <script src="bundle.js" defer></script>
+    <script src="bundle.js" defer></script> <!-- webpack compile script -->
 </body>
 </html>
