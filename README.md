@@ -44,6 +44,8 @@ You do not need to create a custom design for this activity, but you are welcome
 
 ![Screenshot 2024-12-06 083728](https://github.com/user-attachments/assets/04893251-073f-468f-a253-7e6035726c7d)
 
+![Screenshot 2024-12-07 154733](https://github.com/user-attachments/assets/16453e07-faf3-46cb-80fc-5f07db708cb1)
+
 ### 📖 Backend
 
 ...no progress to share
