@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin'); // for the copied assets folder
 
 module.exports = {
   entry: './src/index.ts',
@@ -38,6 +39,14 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: false,
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'assets'), // folder for assets to copy
+          to: path.resolve(__dirname, 'dist/assets'), // where to input the copied folder
+        },
+      ],
     }),
   ],
   devServer: {

@@ -28,6 +28,7 @@ You do not need to create a custom design for this activity, but you are welcome
 - npm i css-loader
 - npm i html-webpack-plugin
 - npm i babel-loader
+- npm install --save-dev webpack webpack-cli copy-webpack-plugin _(copy assets to output dir)_
 
 # 📈 Progress Screenshots >>>
 
