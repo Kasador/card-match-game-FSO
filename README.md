@@ -141,4 +141,21 @@ const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
 
 randomizeCard(cardTypes); // functions expects 1, put array of objects inside variables to call function and use within
 ```
+## Added state management to tell when user has picked TWO cards, now ready to compare values... 
+![Screenshot 2024-12-07 212147](https://github.com/user-attachments/assets/3686d577-8a52-42f0-8cb7-1d6cddd66d81)
 
+### Code _(TS)_
+```javascript 
+let pickTwo: number = 0; // state management 
+let pickedTwo: boolean = false; // state management 
+
+if (pickTwo === 2) { // match or not, on another click, reset
+    pickTwo = 1;
+    pickedTwo = false;
+} else if (pickTwo === 1) { // second pick
+    pickTwo = 2;
+    pickedTwo = true;
+} else if (pickTwo === 0 && !pickedTwo) { // first pick
+    pickTwo = 1;
+}
+```
