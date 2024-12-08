@@ -10,6 +10,11 @@ console.log('JS (TypeScript) file connected.')
 /* let test: string = "test";
 console.log(test); */
 
+const allCards: NodeListOf<Element> = document.querySelectorAll('.card'); // global variable for cards
+const oneCard = document.querySelector('.card');
+let pickTwo: number = 0; // state management 
+let pickedTwo: boolean = false; // state management 
+
 interface MatchOptions { // inferance objects are in CAPS >>> optional sets will end with "?" ex: type: "a" | type?: "b"
     type: "A" | "B" | "C"; // only options for the card types
 }
@@ -18,20 +23,58 @@ const randomizeCard = (opts: MatchOptions[]) => {
     console.log(cardTypes[0].type); // output "a"
     console.log(cardTypes, "array of objects for card types");
 
-    const allCards: NodeListOf<Element> = document.querySelectorAll('.card');
     // console.log(allCards)
     allCards.forEach(card => {
         card.ariaValueText = cardTypes[0].type; // append values types "A, B, C" to the cards
         card.textContent = card.ariaValueText;
-        card.addEventListener('click', () => {
-            let getIdAttr: string | null = card.getAttribute('id');
-            let getCardValue: any = card.ariaValueText;
-            // console.log(getIdAttr)
-            alert(`The value of that card is ${getCardValue} and you clicked on the ${getIdAttr} card.`);
-            console.log(`The value of that card is ${getCardValue} and you clicked on the ${getIdAttr} card.`);
-        });
+
+        // random the cards
     })
 }
+
+allCards.forEach(card => { // add event listener for cards
+    card.addEventListener('click', () => {
+
+        // if (!pickTwo && !pickedTwo) {
+        //     pickTwo = 1;
+        // } else if (pickTwo) {
+        //     pickTwo = 2;
+        // } else if (pickTwo === 2) {
+        //     pickTwo = 3;
+        //     pickedTwo = true;
+        // } else if (pickTwo === 3) {
+        //     pickedTwo = false;
+        //     pickTwo = 0;
+        // }
+
+
+        if (pickTwo === 2) { // match or not, on another click, reset
+            pickTwo = 1;
+            pickedTwo = false;
+        } else if (pickTwo === 1) { // second pick
+            pickTwo = 2;
+            pickedTwo = true;
+        } else if (pickTwo === 0 && !pickedTwo) { // first pick
+            pickTwo = 1;
+        }
+
+
+        // pickTwo = 1; 
+        console.log(`${pickTwo} of 2 picked.`);
+        console.log("Done picking cards:", pickedTwo);
+        let getIdAttr: string | null = card.getAttribute('id');
+        let getCardValue: any = card.ariaValueText;
+        // console.log(getIdAttr)
+        alert(`Card number ${getIdAttr} of ${allCards.length}. You picked ${getCardValue}!`);
+        console.log(`Card number ${getIdAttr} of 6. You picked ${getCardValue}!`);
+
+        // if 
+    });
+})
+
+const compareMatch = (first: string, second: string) => {
+    
+} 
 
 const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
     {type: "A" },
