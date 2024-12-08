@@ -76,16 +76,29 @@ main { // main content >>> cards and the visual game
 
     section { // section styles for card wrapper
         display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
 
         .card {
-            width: 275px;
-            height: 250px;
-            margin: 15px 0px;
+            text-align: center;
+            padding: 105px 90px;
+            margin: 10px auto;
             cursor: pointer;
             background-image: url('/assets/images/card-flip-back.png');
             background-repeat: no-repeat;
             background-position: center;
             background-size: contain;
+            font-size: 3rem;
+            font-family: Rock_3D-Cards;
+            font-weight: bold;
+            color: $color-card;
+
+            transition: all 0.3s;
+
+            &:hover {
+                position: relative;
+                transform: scale(1.02);
+            }
         }
     }
 }
@@ -94,7 +107,7 @@ footer { // footer styles
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 50px;
 
     #footer-results-text { // results text
         font-size: $font-size-medium;
@@ -119,3 +132,42 @@ footer { // footer styles
         }
     }
 }
+
+@media (max-width: 900px) {
+    header { // header styles
+        display: flex;
+        justify-content: center;
+        color: $color-body;
+    
+        section { // header wrapper
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            margin: 15px;
+
+            section { // header title section
+    
+                h1 {
+                    font-size: $font-size-large;
+                }
+                p {
+                    font-size: $font-size-small;
+
+                }
+            }
+    
+            h1 { // header attempts text
+                font-size: $font-size-medium;
+            }
+            #header-attempts-text {
+                position: relative;
+                bottom: 3px;
+            }
+        }
+    }
+    .card {
+        max-width: 125px;
+        max-height: 150px;
+        margin: 0 auto;
+    }
+  }
