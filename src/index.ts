@@ -11,30 +11,35 @@ console.log('JS (TypeScript) file connected.')
 console.log(test); */
 
 interface MatchOptions { // inferance objects are in CAPS >>> optional sets will end with "?" ex: type: "a" | type?: "b"
-    type: "a" | "b" | "c"; // only options for the card types
+    type: "A" | "B" | "C"; // only options for the card types
 }
 
 const randomizeCard = (opts: MatchOptions[]) => {
     console.log(cardTypes[0].type); // output "a"
+    console.log(cardTypes, "array of objects for card types");
 
     const allCards: NodeListOf<Element> = document.querySelectorAll('.card');
     // console.log(allCards)
     allCards.forEach(card => {
+        card.ariaValueText = cardTypes[0].type; // append values types "A, B, C" to the cards
+        card.textContent = card.ariaValueText;
         card.addEventListener('click', () => {
-            let getIdAttr: any = card.getAttribute('id');
-            console.log(getIdAttr)
-            card.textContent = cardTypes[0].type; // this is how we get the card and into the correct (RANDOM) letter 
+            let getIdAttr: string | null = card.getAttribute('id');
+            let getCardValue: any = card.ariaValueText;
+            // console.log(getIdAttr)
+            alert(`The value of that card is ${getCardValue} and you clicked on the ${getIdAttr} card.`);
+            console.log(`The value of that card is ${getCardValue} and you clicked on the ${getIdAttr} card.`);
         });
     })
 }
 
 const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
-    {type: "a" },
-    {type: "a" },
-    {type: "b" },
-    {type: "b" },
-    {type: "c" },
-    {type: "c" },
+    {type: "A" },
+    {type: "A" },
+    {type: "B" },
+    {type: "B" },
+    {type: "C" },
+    {type: "C" },
     // {type: "d" }, >>> this does NOT work, its not in the options
 ]
 
