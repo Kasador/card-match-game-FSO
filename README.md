@@ -63,6 +63,8 @@ plugins: [ // updated plugins to include CopyWebpackPlugin for assets folder _ou
 
 ![Screenshot 2024-12-07 154733](https://github.com/user-attachments/assets/16453e07-faf3-46cb-80fc-5f07db708cb1)
 
+![Screenshot 2024-12-08 080628](https://github.com/user-attachments/assets/d5f42862-2b79-481e-982e-ab54414f8458)
+
 ### 📖 Backend
 
 ## Using interface options an array of objects with TS to define and output type based on card click and index of array.
