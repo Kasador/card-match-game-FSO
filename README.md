@@ -31,8 +31,9 @@ You do not need to create a custom design for this activity, but you are welcome
 - npm install --save-dev webpack webpack-cli copy-webpack-plugin _(copy assets to output dir)_
 
 # 📈🪶 Progress Screenshots/Code
+### _This section will have all the screenshots & code for my updated progress while developing..._
 
-### 🛠️ Setup 
+## 🛠️ Setup 
 
 ![Screenshot 2024-12-05 094446](https://github.com/user-attachments/assets/6ccf7a4d-6529-4395-82a2-d971f3347f8e)
 
@@ -57,7 +58,7 @@ plugins: [ // updated plugins to include CopyWebpackPlugin for assets folder _ou
 
 ![Screenshot 2024-12-05 102507](https://github.com/user-attachments/assets/191f15b6-5509-4dc3-b056-c8e18c6accab)
 
-### 📘 Frontend
+## 📘 Frontend
 
 ![Screenshot 2024-12-06 083728](https://github.com/user-attachments/assets/04893251-073f-468f-a253-7e6035726c7d)
 
@@ -65,10 +66,18 @@ plugins: [ // updated plugins to include CopyWebpackPlugin for assets folder _ou
 
 ![Screenshot 2024-12-08 080628](https://github.com/user-attachments/assets/d5f42862-2b79-481e-982e-ab54414f8458)
 
-### 📖 Backend
+### The Problem & The Solution
+Put my front facing card into Photoshop, and put some round edges on the card; had little spacing with a transparent background for visual border radius. 
+![Screenshot-2024-12-08-080628](https://github.com/user-attachments/assets/f00b1451-1d39-49d1-a5cb-80cd7fdd9fe1)
 
-## Using interface options an array of objects with TS to define and output type based on card click and index of array.
 
+
+## 📖 Backend
+
+### Using interface options an array of objects with TS to define and output type based on card click and index of array.
+![Screenshot 2024-12-07 190836](https://github.com/user-attachments/assets/ddfce91a-2ac7-4eef-a5cb-448c5578d0e6)
+
+### Code _(TS)_
 ```javascript
 interface MatchOptions { // inferance objects are in CAPS >>> optional sets will end with "?" ex: type: "a" | type?: "b"
     type: "a" | "b" | "c"; // only options for the card types
@@ -101,9 +110,7 @@ const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
 randomizeCard(cardTypes); // functions expects 1, put array of objects inside variables to call function and use within
 ```
 
-![Screenshot 2024-12-07 190836](https://github.com/user-attachments/assets/ddfce91a-2ac7-4eef-a5cb-448c5578d0e6)
-
-## Got card value, & the selected card; stored data, ready for SCSS & randomizing cards on load...
+### Got card value, & the selected card; stored data, ready for SCSS & randomizing cards on load...
 ![Screenshot 2024-12-07 195433](https://github.com/user-attachments/assets/9a837a1c-8b9b-4854-a1a5-68c1ea787e22)
 
 ### Code _(TS)_
@@ -143,7 +150,7 @@ const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
 
 randomizeCard(cardTypes); // functions expects 1, put array of objects inside variables to call function and use within
 ```
-## Added state management to tell when user has picked TWO cards, now ready to compare values... 
+### Added state management to tell when user has picked TWO cards, now ready to compare values... 
 ![Screenshot 2024-12-07 212147](https://github.com/user-attachments/assets/3686d577-8a52-42f0-8cb7-1d6cddd66d81)
 
 ### Code _(TS)_
