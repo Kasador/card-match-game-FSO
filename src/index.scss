@@ -75,12 +75,17 @@ main { // main content >>> cards and the visual game
     margin-top: 50px;
 
     section { // section styles for card wrapper
-        margin: 10px auto;
+        display: flex;
 
         .card {
-            width: 175px;
-            margin: 15px;
+            width: 275px;
+            height: 250px;
+            margin: 15px 0px;
             cursor: pointer;
+            background-image: url('/assets/images/card-flip-back.png');
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
         }
     }
 }
