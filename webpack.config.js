@@ -7,10 +7,18 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true, // Cleans the output directory before each build
+    clean: true, // cleans the output directory before each build
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
   },
   module: {
     rules: [
+      {
+        test: /\.ts$/, // added to another TS files
+        exclude: /node_modules/,
+        use: 'ts-loader',
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -24,14 +32,14 @@ module.exports = {
       {
         test: /\.scss$/,
         use: [
-          'style-loader',  // Injects styles into DOM
-          'css-loader',    // Turns CSS into CommonJS
-          'sass-loader',   // Compiles Sass to CSS
+          'style-loader',  // injects styles into DOM
+          'css-loader',    // turns CSS into CommonJS
+          'sass-loader',   // compiles Sass to CSS
         ],
       },
       {
-        test: /\.(png|jpg|jpeg|gif|svg)$/i,  // Matches image files
-        type: 'asset/inline',  // Emits separate files and returns their URLs
+        test: /\.(png|jpg|jpeg|gif|svg)$/i,  // matches image files
+        type: 'asset/inline',  // emits separate files and returns their URLs
       },
     ],
   },
@@ -51,7 +59,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, 'dist'), // Serves static files from the 'dist' directory
+      directory: path.join(__dirname, 'dist'), // serves static files from the 'dist' directory
     },
     compress: true,
     port: 9001,
