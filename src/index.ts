@@ -26,7 +26,7 @@ const randomizeCard = (opts: MatchOptions[]) => {
     // console.log(allCards)
     allCards.forEach(card => {
         card.ariaValueText = cardTypes[0].type; // append values types "A, B, C" to the cards
-        card.textContent = card.ariaValueText;
+        // card.textContent = card.ariaValueText;
 
         // random the cards
     })
@@ -34,7 +34,7 @@ const randomizeCard = (opts: MatchOptions[]) => {
 
 allCards.forEach(card => { // add event listener for cards
     card.addEventListener('click', () => {
-
+        card.textContent = card.ariaValueText;
         // if (!pickTwo && !pickedTwo) {
         //     pickTwo = 1;
         // } else if (pickTwo) {
@@ -64,16 +64,22 @@ allCards.forEach(card => { // add event listener for cards
         console.log("Done picking cards:", pickedTwo);
         let getIdAttr: string | null = card.getAttribute('id');
         let getCardValue: any = card.ariaValueText;
+        showCard(`${getIdAttr}`);
         // console.log(getIdAttr)
-        alert(`Card number ${getIdAttr} of ${allCards.length}. You picked ${getCardValue}!`);
-        console.log(`Card number ${getIdAttr} of 6. You picked ${getCardValue}!`);
-
-        // if 
+        // alert(`Card number ${getIdAttr} of ${allCards.length}. You picked ${getCardValue}!`);
+        console.log(`Card number ${getIdAttr} of 6. You picked ${getCardValue}!
+            -------------------`);
     });
 })
 
 const compareMatch = (first: string, second: string) => {
     
+} 
+
+const showCard = (id: string) => {
+    let card = document.getElementById(`${id}`);
+    console.log('SCSS Applied to card: ', card?.id);
+    card?.setAttribute("style", "background-image: url('/assets/images/card-flip-front.png');");
 } 
 
 const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
