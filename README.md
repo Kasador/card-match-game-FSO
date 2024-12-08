@@ -100,3 +100,45 @@ randomizeCard(cardTypes); // functions expects 1, put array of objects inside va
 ```
 
 ![Screenshot 2024-12-07 190836](https://github.com/user-attachments/assets/ddfce91a-2ac7-4eef-a5cb-448c5578d0e6)
+
+## Got card value, & the selected card; stored data, ready for SCSS & randomizing cards on load...
+![Screenshot 2024-12-07 195433](https://github.com/user-attachments/assets/9a837a1c-8b9b-4854-a1a5-68c1ea787e22)
+
+### Code _(TS)_
+```javascript
+interface MatchOptions { // inferance objects are in CAPS >>> optional sets will end with "?" ex: type: "a" | type?: "b"
+    type: "A" | "B" | "C"; // only options for the card types
+}
+
+const randomizeCard = (opts: MatchOptions[]) => {
+    console.log(cardTypes[0].type); // output "a"
+    console.log(cardTypes, "array of objects for card types");
+
+    const allCards: NodeListOf<Element> = document.querySelectorAll('.card');
+    // console.log(allCards)
+    allCards.forEach(card => {
+        card.ariaValueText = cardTypes[0].type; // append values types "A, B, C" to the cards
+        card.textContent = card.ariaValueText;
+        card.addEventListener('click', () => {
+            let getIdAttr: string | null = card.getAttribute('id');
+            let getCardValue: any = card.ariaValueText;
+            // console.log(getIdAttr)
+            alert(`The value of that card is ${getCardValue} and you clicked on the ${getIdAttr} card.`);
+            console.log(`The value of that card is ${getCardValue} and you clicked on the ${getIdAttr} card.`);
+        });
+    })
+}
+
+const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
+    {type: "A" },
+    {type: "A" },
+    {type: "B" },
+    {type: "B" },
+    {type: "C" },
+    {type: "C" },
+    // {type: "d" }, >>> this does NOT work, its not in the options
+]
+
+randomizeCard(cardTypes); // functions expects 1, put array of objects inside variables to call function and use within
+```
+
