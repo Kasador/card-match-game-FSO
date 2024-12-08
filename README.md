@@ -30,11 +30,28 @@ You do not need to create a custom design for this activity, but you are welcome
 - npm i babel-loader
 - npm install --save-dev webpack webpack-cli copy-webpack-plugin _(copy assets to output dir)_
 
-# 📈 Progress Screenshots >>>
+# 📈🪶 Progress Screenshots/Code
 
 ### 🛠️ Setup 
 
 ![Screenshot 2024-12-05 094446](https://github.com/user-attachments/assets/6ccf7a4d-6529-4395-82a2-d971f3347f8e)
+
+```javascript
+plugins: [ // updated plugins to include CopyWebpackPlugin for assets folder _outside_ src dir
+    new HtmlWebpackPlugin({
+      template: './src/index.html',
+      inject: false,
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, 'assets'), // folder for assets to copy
+          to: path.resolve(__dirname, 'dist/assets'), // where to input the copied folder
+        },
+      ],
+    }),
+  ],
+```
 
 ### ╰┈➤ Deploy to Netlify (**_On Github Push_**)
 

@@ -35,7 +35,7 @@ module.exports = {
       },
     ],
   },
-  plugins: [
+  plugins: [ // updated plugins to include CopyWebpackPlugin for assets folder _outside_ src dir
     new HtmlWebpackPlugin({
       template: './src/index.html',
       inject: false,
