@@ -165,9 +165,16 @@ footer { // footer styles
             }
         }
     }
-    .card {
-        max-width: 125px;
-        max-height: 150px;
-        margin: 0 auto;
+  }
+
+  @media (max-width: 700px) {
+    main {
+        section {
+            margin: 15px;
+            .card {
+                padding: 40px 30px;
+                margin: -10px 10px;
+            }
+        }
     }
   }
