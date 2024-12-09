@@ -11,6 +11,7 @@ import './index.scss'; // imports >>>
     9) https://www.freecodecamp.org/news/javascript-refresh-page-how-to-reload-a-page-in-js/
     10) https://stackoverflow.com/questions/52491832/how-to-use-document-getelementbyid-method-in-typescript
     11) https://stackoverflow.com/questions/5085567/what-is-the-hasclass-function-with-plain-javascript
+    12) https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout
 */
 
 console.log('JS (TypeScript) file connected.')
@@ -26,8 +27,10 @@ let firstPick: string | null = null;
 let secondPick: string | null = null;
 const startOverBtn = document.getElementById('start-over-btn') as HTMLFormElement;
 let attempts = document.getElementById('header-attempts-text') as HTMLFormElement;
+let attemptsLeft: number = 3;
+let preventUserInput = false; // have this at top of code, because of setTimeouts use, if its true, return... Return prevents ALL code from running
 
-startOverBtn?.addEventListener('click', () => {
+startOverBtn.addEventListener('click', () => {
     console.log('Game Reset!');
     location.reload();
 });
@@ -70,9 +73,10 @@ const shuffleCards = (opts: MatchOptions[]) => {
 
 allCards.forEach(card => { // add event listener for cards
     card.addEventListener('click', () => {
+        if (preventUserInput) return; // stop user input if keep clickin
+
         let resultsText = document.getElementById('footer-results-text') as HTMLFormElement; 
         card.textContent = card.ariaValueText;
-        let attemptsLeft: number = 3;
 
         let getIdAttr: string | null = card.getAttribute('id');
         let getCardValue: any = card.ariaValueText;
@@ -89,9 +93,11 @@ allCards.forEach(card => { // add event listener for cards
             }
         } else if (pickTwo === 1) { // second pick
             if (!card.classList.contains('matched')) { // same thing, error handling for matching
-                secondPick = card.ariaValueText;
-                card.classList.add('flipped');
-                console.log('Your Second Pick: ', secondPick);
+                    secondPick = card.ariaValueText;
+                    card.classList.add('flipped');
+                    console.log('Your Second Pick: ', secondPick);
+
+                    preventUserInput = true;
                 }
             if (firstPick === secondPick) {
                 console.log('Match found!'); // if match found >>> keep cards flipped, add matched class
@@ -100,6 +106,8 @@ allCards.forEach(card => { // add event listener for cards
                     .querySelectorAll('.flipped:not(.matched)')
                     .forEach(card => card.classList.add('matched')); // add the class matched to ALL cards that don't have it
             } else { // no match found!
+                attemptsLeft--; // minus one from attempts on match NOT found
+                attempts.textContent = `Attempts Left: ${attemptsLeft}`;
                 console.log('No match.');
                 resultsText.textContent = 'Try again!'; 
                 setTimeout(() => { // flip cards back after a short delay
@@ -117,6 +125,7 @@ allCards.forEach(card => { // add event listener for cards
             setTimeout(() => { // after second pick, match or no match logic goes off,  reset for next turn next turn
                 firstPick = null;
                 secondPick = null;
+                preventUserInput = false;
                 pickTwo = 0;
                 console.log('Ready for the next turn.');
                 resultsText.textContent = 'Try to Match!';
@@ -127,19 +136,29 @@ allCards.forEach(card => { // add event listener for cards
                     }
                 })
                 
-                if (howMany === 6) {
+                if (howMany === 6) { // win
                     resultsText.textContent = 'You Won!';
 
                     setTimeout(() => { 
                         location.reload();
-                    }, 1000);
+                    }, 500);
+
+                    alert('You Won!')
+                } else if (attemptsLeft === 0) { // lose
+                    resultsText.textContent = 'Sorry! Game Over!';
+
+                    setTimeout(() => { 
+                        location.reload();
+                    }, 500);
+
+                    alert('Sorry! Game Over!')
                 }
             }, 1000);
         }
     });
 })
 
-const showCard = (id: string) => {
+const showCard = (id: string) => { // flip card function
     let card = document.getElementById(`${id}`);
     console.log('SCSS Applied to card: ', card?.id);
     card?.setAttribute("style", "background-image: url('/assets/images/card-flip-front.png');");
@@ -158,7 +177,7 @@ const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
 shuffleCards(cardTypes); // functions expects 1, put array of objects inside variables to call function and use within
 // console.log(cardTypes)
 
-const appendValuesGenerated = () => {
+const appendValuesGenerated = () => { // append all the shuffled options into the cards 
     let i = 0;
     allCards.forEach(card => {
         console.log(card, `${cardTypes[i].type}`);
@@ -167,4 +186,4 @@ const appendValuesGenerated = () => {
     });
 }
 
-appendValuesGenerated()
+appendValuesGenerated(); // run this funtion 
