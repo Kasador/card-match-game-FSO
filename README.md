@@ -70,6 +70,10 @@ plugins: [ // updated plugins to include CopyWebpackPlugin for assets folder _ou
 Put my front facing card into Photoshop, and put some round edges on the card; had little spacing with a transparent background for visual border radius. 
 ![Screenshot-2024-12-08-080628](https://github.com/user-attachments/assets/f00b1451-1d39-49d1-a5cb-80cd7fdd9fe1)
 
+### Added media queries to make it more mobile friendly...
+![Screenshot 2024-12-08 191924](https://github.com/user-attachments/assets/bc864d64-8f7c-4163-b26d-d1f682a9fdf3)
+
+
 
 
 ## 📖 Backend
