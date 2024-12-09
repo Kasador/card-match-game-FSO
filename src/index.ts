@@ -7,6 +7,10 @@ import './index.scss'; // imports >>>
     5) https://www.typescriptlang.org/docs/handbook/2/everyday-types.html
     6) https://stackoverflow.com/questions/29043135/javascript-one-line-if-else-else-if-statement
     7) https://stackoverflow.com/questions/48083353/i-want-to-know-how-to-shuffle-an-array-in-typescript
+    8) https://www.w3schools.com/cssref/sel_not.php
+    9) https://www.freecodecamp.org/news/javascript-refresh-page-how-to-reload-a-page-in-js/
+    10) https://stackoverflow.com/questions/52491832/how-to-use-document-getelementbyid-method-in-typescript
+    11) https://stackoverflow.com/questions/5085567/what-is-the-hasclass-function-with-plain-javascript
 */
 
 console.log('JS (TypeScript) file connected.')
@@ -16,9 +20,17 @@ console.log(test); */
 
 // global variable for cards >>> 
 const allCards: NodeListOf<Element> = document.querySelectorAll('.card');
-const oneCard = document.querySelector('.card');
+// const oneCard = document.querySelector('.card');
 let pickTwo: number = 0; // state management 
-let pickedTwo: boolean = false; // state management 
+let firstPick: string | null = null;
+let secondPick: string | null = null;
+const startOverBtn = document.getElementById('start-over-btn') as HTMLFormElement;
+let attempts = document.getElementById('header-attempts-text') as HTMLFormElement;
+
+startOverBtn?.addEventListener('click', () => {
+    console.log('Game Reset!');
+    location.reload();
+});
 
 
 interface MatchOptions { // inferance objects are in CAPS >>> optional sets will end with "?" ex: type: "a" | type?: "b"
@@ -58,35 +70,74 @@ const shuffleCards = (opts: MatchOptions[]) => {
 
 allCards.forEach(card => { // add event listener for cards
     card.addEventListener('click', () => {
+        let resultsText = document.getElementById('footer-results-text') as HTMLFormElement; 
         card.textContent = card.ariaValueText;
+        let attemptsLeft: number = 3;
 
-        if (pickTwo === 2) { // match or not, on another click, reset
-            pickTwo = 1;
-            pickedTwo = false;
-        } else if (pickTwo === 1) { // second pick
-            pickTwo = 2;
-            pickedTwo = true;
-        } else if (pickTwo === 0 && !pickedTwo) { // first pick
-            pickTwo = 1;
-        }
-
-
-        // pickTwo = 1; 
-        console.log(`${pickTwo} of 2 picked.`);
-        console.log("Done picking cards:", pickedTwo);
         let getIdAttr: string | null = card.getAttribute('id');
         let getCardValue: any = card.ariaValueText;
         showCard(`${getIdAttr}`);
-        // console.log(getIdAttr)
-        // alert(`Card number ${getIdAttr} of ${allCards.length}. You picked ${getCardValue}!`);
         console.log(`Card number ${getIdAttr} of 6. You picked ${getCardValue}!
             -------------------`);
+
+        if (pickTwo === 0) { // first pick
+            if (!card.classList.contains('matched')) { // to see if its already match, A.K.A. Don't allow user to try to match ALREADY matched cards
+                firstPick = card.ariaValueText;
+                card.classList.add('flipped'); // add flip class
+                console.log('Your First Pick: ', firstPick);
+                pickTwo = 1; // move to the second pick
+            }
+        } else if (pickTwo === 1) { // second pick
+            if (!card.classList.contains('matched')) { // same thing, error handling for matching
+                secondPick = card.ariaValueText;
+                card.classList.add('flipped');
+                console.log('Your Second Pick: ', secondPick);
+                }
+            if (firstPick === secondPick) {
+                console.log('Match found!'); // if match found >>> keep cards flipped, add matched class
+                resultsText.textContent = 'Match found!';
+                document
+                    .querySelectorAll('.flipped:not(.matched)')
+                    .forEach(card => card.classList.add('matched')); // add the class matched to ALL cards that don't have it
+            } else { // no match found!
+                console.log('No match.');
+                resultsText.textContent = 'Try again!'; 
+                setTimeout(() => { // flip cards back after a short delay
+                    document
+                        .querySelectorAll('.flipped:not(.matched)')
+                        .forEach(card => {
+                            card.textContent = '?'; // reset card
+                            card.classList.remove('flipped');
+                            card.setAttribute("style", "background-image: url('/assets/images/card-flip-back.png');");
+                        });
+                }, 1000); // 1s delay
+            }
+
+            let howMany = 0;
+            setTimeout(() => { // after second pick, match or no match logic goes off,  reset for next turn next turn
+                firstPick = null;
+                secondPick = null;
+                pickTwo = 0;
+                console.log('Ready for the next turn.');
+                resultsText.textContent = 'Try to Match!';
+                allCards.forEach(card => {
+                    if (card.classList.contains('matched')) {
+                        howMany += 1; 
+                        console.log(howMany);
+                    }
+                })
+                
+                if (howMany === 6) {
+                    resultsText.textContent = 'You Won!';
+
+                    setTimeout(() => { 
+                        location.reload();
+                    }, 1000);
+                }
+            }, 1000);
+        }
     });
 })
-
-const compareMatch = (first: string, second: string) => {
-    // compare the two picks
-} 
 
 const showCard = (id: string) => {
     let card = document.getElementById(`${id}`);
@@ -104,7 +155,6 @@ const cardTypes: MatchOptions[] = [ // array of objects within a stored variable
     // {type: "d" }, >>> this does NOT work, its not in the options
 ]
 
-
 shuffleCards(cardTypes); // functions expects 1, put array of objects inside variables to call function and use within
 // console.log(cardTypes)
 
@@ -116,6 +166,5 @@ const appendValuesGenerated = () => {
         i++;
     });
 }
-
 
 appendValuesGenerated()
