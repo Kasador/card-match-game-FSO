@@ -288,3 +288,96 @@ const appendValuesGenerated = () => {
 appendValuesGenerated(); // append the avlues shuffled
 ```
 
+### Backend Complete
+
+![Screenshot 2024-12-08 190709](https://github.com/user-attachments/assets/7cf2be54-934e-4e7f-9750-005bb3d7e54e)
+
+### Code _(TS - Main Logic)_
+```javascript
+allCards.forEach(card => { // add event listener for cards
+    card.addEventListener('click', () => {
+        if (preventUserInput) return; // stop user input if keep clickin
+
+        let resultsText = document.getElementById('footer-results-text') as HTMLFormElement; 
+        card.textContent = card.ariaValueText;
+
+        let getIdAttr: string | null = card.getAttribute('id');
+        let getCardValue: any = card.ariaValueText;
+        showCard(`${getIdAttr}`);
+        console.log(`Card number ${getIdAttr} of 6. You picked ${getCardValue}!
+            -------------------`);
+
+        if (pickTwo === 0) { // first pick
+            if (!card.classList.contains('matched')) { // to see if its already match, A.K.A. Don't allow user to try to match ALREADY matched cards
+                firstPick = card.ariaValueText;
+                card.classList.add('flipped'); // add flip class
+                console.log('Your First Pick: ', firstPick);
+                pickTwo = 1; // move to the second pick
+            }
+        } else if (pickTwo === 1) { // second pick
+            if (!card.classList.contains('matched')) { // same thing, error handling for matching
+                    secondPick = card.ariaValueText;
+                    card.classList.add('flipped');
+                    console.log('Your Second Pick: ', secondPick);
+
+                    preventUserInput = true;
+                }
+            if (firstPick === secondPick) {
+                console.log('Match found!'); // if match found >>> keep cards flipped, add matched class
+                resultsText.textContent = 'Match found!';
+                document
+                    .querySelectorAll('.flipped:not(.matched)')
+                    .forEach(card => card.classList.add('matched')); // add the class matched to ALL cards that don't have it
+            } else { // no match found!
+                attemptsLeft--; // minus one from attempts on match NOT found
+                attempts.textContent = `Attempts Left: ${attemptsLeft}`;
+                console.log('No match.');
+                resultsText.textContent = 'Try again!'; 
+                setTimeout(() => { // flip cards back after a short delay
+                    document
+                        .querySelectorAll('.flipped:not(.matched)')
+                        .forEach(card => {
+                            card.textContent = '?'; // reset card
+                            card.classList.remove('flipped');
+                            card.setAttribute("style", "background-image: url('/assets/images/card-flip-back.png');");
+                        });
+                }, 1000); // 1s delay
+            }
+
+            let howMany = 0;
+            setTimeout(() => { // after second pick, match or no match logic goes off,  reset for next turn next turn
+                firstPick = null;
+                secondPick = null;
+                preventUserInput = false;
+                pickTwo = 0;
+                console.log('Ready for the next turn.');
+                resultsText.textContent = 'Try to Match!';
+                allCards.forEach(card => {
+                    if (card.classList.contains('matched')) {
+                        howMany += 1; 
+                        console.log(howMany);
+                    }
+                })
+                
+                if (howMany === 6) { // win
+                    resultsText.textContent = 'You Won!';
+
+                    setTimeout(() => { 
+                        location.reload();
+                    }, 500);
+
+                    alert('You Won!')
+                } else if (attemptsLeft === 0) { // lose
+                    resultsText.textContent = 'Sorry! Game Over!';
+
+                    setTimeout(() => { 
+                        location.reload();
+                    }, 500);
+
+                    alert('Sorry! Game Over!')
+                }
+            }, 1000);
+        }
+    });
+})
+```
